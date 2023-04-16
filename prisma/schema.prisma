@@ -54,3 +54,11 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Brand {
+  id       String @id @default(cuid())
+  name     String
+  image    String
+  industry Int
+  colors   String?
+}

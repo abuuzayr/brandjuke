@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-const DOMAIN = "https://precedent.dev";
+const DOMAIN = "https://brandbuzza.com";
 
 export default function Meta({
-  title = "Precedent - Building blocks for your Next.js project",
-  description = "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
+  title = "⚡️ BrandBuzza - Logo inspiration and API",
+  description = "Brandbuzza is an open-source collection of brand logos for your inspiration.",
   image = `${DOMAIN}/api/og`,
 }: {
   title?: string;
@@ -27,7 +27,7 @@ export default function Meta({
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@vercel" />
-      <meta name="twitter:creator" content="@steventey" />
+      <meta name="twitter:creator" content="@abuuzayr" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />

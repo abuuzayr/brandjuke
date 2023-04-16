@@ -18,20 +18,19 @@ const DemoModal = ({
   return (
     <Modal showModal={showDemoModal} setShowModal={setShowDemoModal}>
       <div className="w-full overflow-hidden md:max-w-md md:rounded-2xl md:border md:border-gray-100 md:shadow-xl">
-        <div className="flex flex-col items-center justify-center space-y-3 bg-white px-4 py-6 pt-8 text-center md:px-16">
-          <a href="https://precedent.dev">
+        <div className="flex flex-col items-center justify-center px-4 py-6 pt-8 space-y-3 text-center bg-white md:px-16">
+          <a href="https://brandbuzza.com">
             <Image
               src="/logo.png"
-              alt="Precedent Logo"
-              className="h-10 w-10 rounded-full"
+              alt="Brandbuzza Logo"
+              className="w-10 h-10 rounded-full"
               width={20}
               height={20}
             />
           </a>
-          <h3 className="font-display text-2xl font-bold">Precedent</h3>
+          <h3 className="text-2xl font-bold font-display">Brandbuzza</h3>
           <p className="text-sm text-gray-500">
-            Precedent is an opinionated collection of components, hooks, and
-            utilities for your Next.js project.
+            Brandbuzza is an open-source collection of brand logos for your inspiration.
           </p>
         </div>
       </div>

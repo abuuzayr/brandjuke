@@ -3,13 +3,32 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["lh3.googleusercontent.com"],
+    remotePatterns: [
+      // TODO: accept only images from cloudflare workers URL
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
+  webpack: (config, options) => {
+    config.module.rules.push({
+        test: /\.csv$/,
+        loader: 'csv-loader',
+        options: {
+          dynamicTyping: true,
+          header: true,
+          skipEmptyLines: true
+        }
+      })
+
+    return config
   },
   async redirects() {
     return [
       {
         source: "/github",
-        destination: "https://github.com/steven-tey/precedent",
+        destination: "https://github.com/abuuzayr/brandbuzza",
         permanent: false,
       },
     ];

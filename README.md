@@ -1,48 +1,61 @@
-<a href="https://precedent.dev">
-  <img alt="Precedent – Building blocks for your Next project" src="https://precedent.dev/api/og">
-  <h1 align="center">Precedent</h1>
+<a href="https://brandbuzza.com">
+  <img alt="Brandbuzza – Explore brand logos for your inspiration" src="https://brandbuzza.com/api/og">
+  <h1 align="center">Brandbuzza</h1>
 </a>
 
 <p align="center">
-  Building blocks for your Next project
-</p>
-
-<p align="center">
-  <a href="https://twitter.com/steventey">
-    <img src="https://img.shields.io/twitter/follow/steventey?style=flat&label=steventey&logo=twitter&color=0bf&logoColor=fff" alt="Steven Tey Twitter follower count" />
-  </a>
-  <a href="https://github.com/steven-tey/precedent">
-    <img src="https://img.shields.io/github/stars/steven-tey/precedent?label=steven-tey%2Fprecedent" alt="Precedent repo star count" />
-  </a>
+  Explore brand logos for your inspiration
 </p>
 
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
-  <a href="#one-click-deploy"><strong>One-click Deploy</strong></a> ·
-  <a href="#tech-stack--features"><strong>Tech Stack + Features</strong></a> ·
   <a href="#author"><strong>Author</strong></a>
 </p>
 <br/>
 
 ## Introduction
 
-Precedent is an opinionated collection of components, hooks, and utilities for your Next.js project.
+Brandbuzza is an open source collection of brand logos for your inspiration.
 
-## One-click Deploy
+## List of colors
 
-You can deploy this template to Vercel with the button below:
+| Color  | Shade   |
+| ------ | ------- |
+| Red    | #FF0000 |
+| Orange | #FFA500 |
+| Yellow | #FFFF00 |
+| Green  | #008000 |
+| Blue   | #0000FF |
+| Violet | #EE82EE |
+| Brown  | #A52A2A |
+| Black  | #000000 |
+| Grey   | #808080 |
+| White  | #FFFFFF |
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fprecedent&project-name=precedent&repository-name=precedent&demo-title=Precedent&demo-description=An%20opinionated%20collection%20of%20components%2C%20hooks%2C%20and%20utilities%20for%20your%20Next%20project.&demo-url=https%3A%2F%2Fprecedent.dev&demo-image=https%3A%2F%2Fprecedent.dev%2Fapi%2Fog&env=DATABASE_URL,GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,NEXTAUTH_SECRET&envDescription=How%20to%20get%20these%20env%20variables%3A&envLink=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fprecedent%2Fblob%2Fmain%2F.env.example)
+## List of industries
 
-You can also clone & create this repo locally with the following command:
-
-```bash
-npx create-next-app precedent --example "https://github.com/steven-tey/precedent"
-```
-
-## Tech Stack + Features
-
-https://user-images.githubusercontent.com/28986134/212368288-12f41e37-aa8c-4e0a-a542-cf6d23410a65.mp4
+| Code | Industry                                                               |
+| ---- | ---------------------------------------------------------------------- |
+| 1    | Agriculture, forestry, fishing, and hunting                            |
+| 2    | Mining, quarrying, and oil and gas extraction                          |
+| 3    | Utilities                                                              |
+| 4    | Construction                                                           |
+| 5    | Manufacturing                                                          |
+| 6    | Wholesale trade                                                        |
+| 7    | Retail trade                                                           |
+| 8    | Transportation and warehousing                                         |
+| 9    | Information and cultural industries                                    |
+| 10   | Finance and insurance                                                  |
+| 11   | Real estate and rental and leasing                                     |
+| 12   | Professional, scientific and technical services                        |
+| 13   | Management of companies and enterprises                                |
+| 14   | Administrative and support, waste management, and remediation services |
+| 15   | Educational services                                                   |
+| 16   | Health care and social assistance                                      |
+| 17   | Arts, entertainment, and recreation                                    |
+| 18   | Accommodation and food services                                        |
+| 19   | Other services (except public administration)                          |
+| 20   | Public administration                                                  |
 
 ### Frameworks
 
@@ -65,26 +78,16 @@ https://user-images.githubusercontent.com/28986134/212368288-12f41e37-aa8c-4e0a-
 - [`@vercel/og`](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation) – Generate dynamic Open Graph images on the edge
 - [`react-wrap-balancer`](https://github.com/shuding/react-wrap-balancer) – Simple React component that makes titles more readable
 
-### Hooks and Utilities
-
-- `useIntersectionObserver` –  React hook to observe when an element enters or leaves the viewport
-- `useLocalStorage` – Persist data in the browser's local storage
-- `useScroll` – React hook to observe scroll position ([example](https://github.com/steven-tey/precedent/blob/main/components/layout/index.tsx#L25))
-- `nFormatter` – Format numbers with suffixes like `1.2k` or `1.2M`
-- `capitalize` – Capitalize the first letter of a string
-- `truncate` – Truncate a string to a specified length
-- [`use-debounce`](https://www.npmjs.com/package/use-debounce) – Debounce a function call / state update
-
 ### Code Quality
 
 - [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end typesafety
 - [Prettier](https://prettier.io/) – Opinionated code formatter for consistent code style
 - [ESLint](https://eslint.org/) – Pluggable linter for Next.js and TypeScript
 
-### Miscellaneous
-
-- [Vercel Analytics](https://vercel.com/analytics) – Track unique visitors, pageviews, and more in a privacy-friendly way
-
 ## Author
 
-- Steven Tey ([@steventey](https://twitter.com/steventey))
+- Abu Uzayr ([@abuuzayr](https://builtforfifty.com/))
+
+## Credits
+
+- Based off [Precedent](https://precedent.dev) by Steven Tey ([@steventey](https://twitter.com/steventey))

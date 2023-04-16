@@ -12,20 +12,20 @@ export default function ComponentGrid() {
       <DemoModal />
       <button
         onClick={() => setShowDemoModal(true)}
-        className="flex w-40 items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100"
+        className="flex items-center justify-center w-40 px-3 py-2 transition-all duration-75 border border-gray-300 rounded-md hover:border-gray-800 focus:outline-none active:bg-gray-100"
       >
         <p className="text-gray-600">Modal</p>
       </button>
       <Popover
         content={
-          <div className="w-full rounded-md bg-white p-2 sm:w-40">
-            <button className="flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200">
+          <div className="w-full p-2 bg-white rounded-md sm:w-40">
+            <button className="flex items-center justify-start w-full p-2 space-x-2 text-sm text-left transition-all duration-75 rounded-md hover:bg-gray-100 active:bg-gray-200">
               Item 1
             </button>
-            <button className="flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200">
+            <button className="flex items-center justify-start w-full p-2 space-x-2 text-sm text-left transition-all duration-75 rounded-md hover:bg-gray-100 active:bg-gray-200">
               Item 2
             </button>
-            <button className="flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200">
+            <button className="flex items-center justify-start w-full p-2 space-x-2 text-sm text-left transition-all duration-75 rounded-md hover:bg-gray-100 active:bg-gray-200">
               Item 3
             </button>
           </div>
@@ -35,7 +35,7 @@ export default function ComponentGrid() {
       >
         <button
           onClick={() => setOpenPopover(!openPopover)}
-          className="flex w-40 items-center justify-between rounded-md border border-gray-300 px-4 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100"
+          className="flex items-center justify-between w-40 px-4 py-2 transition-all duration-75 border border-gray-300 rounded-md hover:border-gray-800 focus:outline-none active:bg-gray-100"
         >
           <p className="text-gray-600">Popover</p>
           <ChevronDown
@@ -45,8 +45,8 @@ export default function ComponentGrid() {
           />
         </button>
       </Popover>
-      <Tooltip content="Precedent is an opinionated collection of components, hooks, and utilities for your Next.js project.">
-        <div className="flex w-40 cursor-default items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-all duration-75 hover:border-gray-800 focus:outline-none active:bg-gray-100">
+      <Tooltip content="Brandbuzza is an open-source collection of brand logos for your inspiration">
+        <div className="flex items-center justify-center w-40 px-3 py-2 transition-all duration-75 border border-gray-300 rounded-md cursor-default hover:border-gray-800 focus:outline-none active:bg-gray-100">
           <p className="text-gray-600">Tooltip</p>
         </div>
       </Tooltip>

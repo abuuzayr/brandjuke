@@ -1,13 +1,14 @@
 import { FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
+import { Buzz, Github } from "@/components/shared/icons";
 import Link from "next/link";
 import { ReactNode } from "react";
 import useScroll from "@/lib/hooks/use-scroll";
 import Meta from "./meta";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
+import { Toaster } from "react-hot-toast";
 
 export default function Layout({
   meta,
@@ -28,7 +29,8 @@ export default function Layout({
     <>
       <Meta {...meta} />
       <SignInModal />
-      <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+      <Toaster />
+      <div className="fixed h-screen w-full bg-gradient-to-br from-rose-100 via-white to-teal-100" />
       <div
         className={`fixed top-0 w-full ${
           scrolled
@@ -38,16 +40,21 @@ export default function Layout({
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
           <Link href="/" className="flex items-center font-display text-2xl">
-            <Image
-              src="/logo.png"
-              alt="Precedent logo"
-              width="30"
-              height="30"
-              className="mr-2 rounded-sm"
-            ></Image>
-            <p>Precedent</p>
+            <Buzz className="h-8 w-8" />
+            <p>BrandBuzza</p>
           </Link>
-          <div>
+          <div className="flex space-x-2">
+            <AnimatePresence>
+              <a
+                className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
+                href="https://github.com/abuuzayr/brandbuzza"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github />
+                <p>Star on GitHub</p>
+              </a>
+            </AnimatePresence>
             <AnimatePresence>
               {!session && status !== "loading" ? (
                 <motion.button
@@ -67,18 +74,12 @@ export default function Layout({
       <main className="flex w-full flex-col items-center justify-center py-32">
         {children}
       </main>
-      <div className="absolute w-full border-t border-gray-200 bg-white py-5 text-center">
-        <p className="text-gray-500">
-          A free template by{" "}
-          <a
-            className="font-medium text-gray-800 underline transition-colors"
-            href="https://twitter.com/steventey"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Steven Tey
-          </a>
-        </p>
+      <div className="absolute w-full border-t border-gray-200 bg-white py-5 flex justify-center">
+        <div className="w-4/5">
+          <p className="text-gray-500">
+            API
+          </p>
+        </div>
       </div>
     </>
   );
