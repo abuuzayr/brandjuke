@@ -1,0 +1,25 @@
+name: Check and upload images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Check and upload images
+        env:
+          B2_ACCOUNT_ID: ${{ secrets.B2_ACCOUNT_ID }}
+          B2_ACCOUNT_KEY: ${{ secrets.B2_ACCOUNT_KEY }}
+          B2_BUCKET_NAME: brandbuzza
+        run: python check_and_upload_images.py
