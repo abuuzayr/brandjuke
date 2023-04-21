@@ -26,3 +26,4 @@ jobs:
           B2_BUCKET_NAME: brandbuzza
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
+        run: node verify-and-process-csv.js
