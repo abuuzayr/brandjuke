@@ -124,7 +124,7 @@ async function checkAndUploadImages() {
     }
     row[colorColumn] = color;
   }
-
+  const csvString = unparse(rows);
   const client = new Octokit({
     auth: process.env.GITHUB_TOKEN,
   });
