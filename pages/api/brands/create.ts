@@ -7,7 +7,7 @@ import ntc from "@/lib/ntc";
 import sharp from "sharp"
 import path from "path"
 import * as fs from 'fs';
-import { Octokit, App } from "octokit";
+import { Octokit } from "@octokit/rest";
 
 const UPLOAD_LIMIT = 2 * 1024 * 1024; // 2MB
 
@@ -72,12 +72,69 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       color: baseColorName,
     };
 
-    // Append to CSV
-    fs.appendFileSync(
-      "data/brands.csv",
-      `${name},${newBrand["image"]},${baseColorName},${industry}\r\n`,
-    );
-  
+    const client = new Octokit({
+      auth: process.env.GITHUB_TOKEN,
+    });
+    const commits = await client.repos.listCommits({
+      // TODO: Change to brandbuzza-bot or something
+      owner: "abuuzayr",
+      repo: "brandbuzza",
+    });
+    const commitSHA = commits.data[0].sha;
+
+    const {
+      data: { sha: currentTreeSHA },
+    } = await client.git.createTree({
+      owner: "abuuzayr",
+      repo: "brandbuzza",
+      tree: [
+        {
+          path: "data/brands.csv",
+          mode: "100644",
+          type: "commit",
+          content: fs.readFileSync("data/brands.csv").toString() + `${name},${newBrand["image"]},${baseColorName},${industry}\r\n`,
+        },
+      ],
+      base_tree: commitSHA,
+      message: `Add ${name} data by user`,
+      parents: [commitSHA],
+    });
+
+    const {
+      data: { sha: newCommitSHA },
+    } = await client.git.createCommit({
+      owner: "abuuzayr",
+      repo: "brandbuzza",
+      tree: currentTreeSHA,
+      message: `Add ${name} data by user`,
+      parents: [commitSHA],
+    });
+
+    const refHash = hasha((new Date).toISOString(), {'algorithm': 'md5'}).substring(0,10)
+    const branchName = `add-${name.toLowerCase()}-${refHash}`;
+    const refName = `heads/${branchName}`;
+
+    await client.git.createRef({
+      owner: "abuuzayr",
+      repo: "brandbuzza",
+      ref: `refs/${refName}`,
+      sha: newCommitSHA,
+    });
+
+    const createPrResponse = await client.rest.pulls.create({
+      owner: "abuuzayr",
+      repo: "brandbuzza",
+      head: branchName,
+      base: "main",
+      title: `Add ${name} data by user`,
+    });
+
+    await client.rest.pulls.merge({
+      owner: "abuuzayr",
+      repo: "brandbuzza",
+      pull_number: createPrResponse.data.number,
+    });
+
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     return res.status(200).json(newBrand);
