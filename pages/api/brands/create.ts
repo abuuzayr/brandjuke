@@ -29,9 +29,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       `https://api.backblazeb2.com/b2api/v2/b2_authorize_account`,
       {
         headers: {
-          Authorization: `Basic ${Buffer.from(`${process.env.B2_APP_ID}:${process.env.B2_APP_KEY}`).toString("base64")}`,
-        }
-      }
+          Authorization: `Basic ${Buffer.from(
+            `${process.env.B2_APP_ID}:${process.env.B2_APP_KEY}`,
+          ).toString("base64")}`,
+        },
+      },
     );
     const uploadUrlObj = await axios.post(
       `${authObj["data"]["apiUrl"]}/b2api/v2/b2_get_upload_url`,
@@ -46,7 +48,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const fileHash = await hasha.fromFile(path.join(__dirname, "/tmp.webp"), {
       algorithm: "sha1",
     });
-    const b64EncodedFileName = encodeURI(Buffer.from(image.split("/").slice(-1)[0]).toString("base64")) + ".webp";
+    const b64EncodedFileName =
+      encodeURI(Buffer.from(image.split("/").slice(-1)[0]).toString("base64")) +
+      ".webp";
     const uploadedObj = await axios({
       url: uploadUrlObj["data"]["uploadUrl"],
       method: "POST",
@@ -62,7 +66,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     // Get dominant color
     await sharp(fileBuffer).toFile(path.join(__dirname, "/tmp.png"));
     const color = await getColor(path.join(__dirname, "/tmp.png"));
-    const rgb = `#${color[0].toString(16).padStart(2, '0')}${color[1].toString(16).padStart(2, '0')}${color[2].toString(16).padStart(2, '0')}`;
+    const rgb = `#${color[0].toString(16).padStart(2, "0")}${color[1]
+      .toString(16)
+      .padStart(2, "0")}${color[2].toString(16).padStart(2, "0")}`;
     const baseColorName = `${ntc.name(rgb)[3]}`.toLowerCase();
 
     const newBrand = {
@@ -92,7 +98,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
           path: "data/brands.csv",
           mode: "100644",
           type: "commit",
-          content: fs.readFileSync("data/brands.csv").toString() + `${name},${newBrand["image"]},${baseColorName},${industry}\r\n`,
+          content:
+            fs.readFileSync("data/brands.csv").toString() +
+            `${name},${newBrand["image"]},${baseColorName},${industry}\r\n`,
         },
       ],
       base_tree: commitSHA,
@@ -110,7 +118,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       parents: [commitSHA],
     });
 
-    const refHash = hasha((new Date).toISOString(), {'algorithm': 'md5'}).substring(0,10)
+    const refHash = hasha(new Date().toISOString(), {
+      algorithm: "md5",
+    }).substring(0, 10);
     const branchName = `add-${name.toLowerCase()}-${refHash}`;
     const refName = `heads/${branchName}`;
 
