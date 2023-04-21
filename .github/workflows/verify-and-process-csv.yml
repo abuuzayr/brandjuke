@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'data/brands.csv'
 
 jobs:
   check_images:
@@ -18,4 +20,4 @@ jobs:
           B2_ACCOUNT_ID: ${{ secrets.B2_ACCOUNT_ID }}
           B2_ACCOUNT_KEY: ${{ secrets.B2_ACCOUNT_KEY }}
           B2_BUCKET_NAME: brandbuzza
-        run: deno run verify-csv.js
+        run: node verify-and-process-csv.js
