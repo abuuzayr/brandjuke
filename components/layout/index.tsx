@@ -9,6 +9,7 @@ import Meta from "./meta";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Toaster } from "react-hot-toast";
+import { useBrandInputModal } from "../home/brand-input-modal";
 
 export default function Layout({
   meta,
@@ -24,13 +25,15 @@ export default function Layout({
   const { data: session, status } = useSession();
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
+  const { BrandInputModal, setShowBrandInputModal } = useBrandInputModal();
 
   return (
     <>
       <Meta {...meta} />
       <SignInModal />
+      <BrandInputModal />
       <Toaster />
-      <div className="fixed h-screen w-full bg-gradient-to-br from-rose-100 via-white to-teal-100" />
+      <div className="fixed w-full h-screen bg-gradient-to-br from-rose-100 via-white to-teal-100" />
       <div
         className={`fixed top-0 w-full ${
           scrolled
@@ -38,15 +41,15 @@ export default function Layout({
             : "bg-white/0"
         } z-30 transition-all`}
       >
-        <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
-          <Link href="/" className="flex items-center font-display text-2xl">
-            <Buzz className="h-8 w-8" />
+        <div className="flex items-center justify-between h-16 max-w-screen-xl mx-5 xl:mx-auto">
+          <Link href="/" className="flex items-center text-2xl font-display">
+            <Buzz className="w-8 h-8" />
             <p>BrandBuzza</p>
           </Link>
           <div className="flex space-x-2">
             <AnimatePresence>
               <a
-                className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
+                className="flex items-center justify-center px-5 space-x-2 text-sm text-gray-600 transition-colors rounded-lg shadow hover:shadow-md max-w-fit"
                 href="https://github.com/abuuzayr/brandbuzza"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -58,23 +61,23 @@ export default function Layout({
             <AnimatePresence>
               {!session && status !== "loading" ? (
                 <motion.button
-                  className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+                  className="rounded-lg border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
                   onClick={() => setShowSignInModal(true)}
                   {...FADE_IN_ANIMATION_SETTINGS}
                 >
                   Sign In
                 </motion.button>
               ) : (
-                <UserDropdown />
+                <UserDropdown setShowBrandInputModal={setShowBrandInputModal} />
               )}
             </AnimatePresence>
           </div>
         </div>
       </div>
-      <main className="flex w-full flex-col items-center justify-center py-32">
+      <main className="flex flex-col items-center justify-center w-full py-32">
         {children}
       </main>
-      <div className="absolute w-full border-t border-gray-200 bg-white py-5 flex justify-center">
+      <div className="absolute flex justify-center w-full py-5 bg-white border-t border-gray-200">
         <div className="w-4/5">
           <p className="text-gray-500">
             API
