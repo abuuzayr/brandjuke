@@ -26,7 +26,7 @@ async function uploadFile(imageUrl) {
   }
 
   const contentLength = Number(fileBuffer.headers["content-length"]);
-  if (contentLength > 2 * 1024 * 1024) {
+  if (contentLength > UPLOAD_LIMIT) {
     return imageUrl;
   }
 
@@ -98,7 +98,7 @@ async function uploadFile(imageUrl) {
 }
 
 async function checkAndUploadImages() {
-  const csvFile = "data/brands.csv";
+  const csvFile = "./data/brands.csv";
   const csvData = fs.readFileSync(csvFile, "utf-8");
   const rows = parse(csvData, { header: true, skipEmptyLines: true }).data;
 
