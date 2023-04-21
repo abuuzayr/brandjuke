@@ -90,7 +90,7 @@ export default function Home() {
           </AnimatePresence>
           <div className="text-xs font-semibold text-gray-400">OR</div>
           <a
-            href="https://github.com/abuuzayr/brandbuzza/data/brands.csv"
+            href="https://github.com/abuuzayr/brandbuzza/edit/main/data/brands.csv"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200"
