@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'data/brands.csv'
+  workflow_dispatch:
 
 jobs:
   check_images:
@@ -25,12 +26,3 @@ jobs:
           B2_BUCKET_NAME: brandbuzza
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
-        run: |
-          touch .env
-          echo B2_APP_KEY=$B2_APP_KEY >> .env
-          echo B2_APP_ID=$B2_APP_ID >> .env
-          echo B2_BUCKET_ID=$B2_BUCKET_ID >> .env
-          echo B2_BUCKET_NAME=$B2_BUCKET_NAME >> .env
-          echo GITHUB_TOKEN=$GITHUB_TOKEN >> .env
-          echo GITHUB_ACTOR=$GITHUB_ACTOR >> .env
-          node verify-and-process-csv.js
