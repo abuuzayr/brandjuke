@@ -34,28 +34,27 @@ Brandbuzza is an open source collection of brand logos for your inspiration.
 
 ## List of industries
 
-| Code | Industry                                                               |
-| ---- | ---------------------------------------------------------------------- |
-| 1    | Agriculture, forestry, fishing, and hunting                            |
-| 2    | Mining, quarrying, and oil and gas extraction                          |
-| 3    | Utilities                                                              |
-| 4    | Construction                                                           |
-| 5    | Manufacturing                                                          |
-| 6    | Wholesale trade                                                        |
-| 7    | Retail trade                                                           |
-| 8    | Transportation and warehousing                                         |
-| 9    | Information and cultural industries                                    |
-| 10   | Finance and insurance                                                  |
-| 11   | Real estate and rental and leasing                                     |
-| 12   | Professional, scientific and technical services                        |
-| 13   | Management of companies and enterprises                                |
-| 14   | Administrative and support, waste management, and remediation services |
-| 15   | Educational services                                                   |
-| 16   | Health care and social assistance                                      |
-| 17   | Arts, entertainment, and recreation                                    |
-| 18   | Accommodation and food services                                        |
-| 19   | Other services (except public administration)                          |
-| 20   | Public administration                                                  |
+| Code | Industry          |
+| ---- | ----------------- |
+| 1    | Aerospace         |
+| 2    | Transport         |
+| 3    | Computer          |
+| 4    | Telecommunication |
+| 5    | Agriculture       |
+| 6    | Construction      |
+| 7    | Education         |
+| 8    | Pharmaceutical    |
+| 9    | Food              |
+| 10   | Health care       |
+| 11   | Hospitality       |
+| 12   | Entertainment     |
+| 13   | News / Media      |
+| 14   | Energy            |
+| 15   | Manufacturing     |
+| 16   | Music             |
+| 17   | Mining            |
+| 18   | Worldwide web     |
+| 19   | Electronics       |
 
 ### Frameworks
 
