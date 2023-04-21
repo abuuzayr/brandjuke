@@ -29,7 +29,7 @@
     "color-2-name": "^1.1.1",
     "colorthief": "^2.4.0",
     "dotenv": "^16.0.3",
-    "duckdb": "^0.7.1",
+    "duckdb": "0.6.1",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
     "focus-trap-react": "^10.0.2",
