@@ -84,7 +84,7 @@ async function uploadFile(imageUrl) {
   }
 
   // Get dominant color
-  await sharp(fileBuffer).toFile(path.join(__dirname, "/tmp.png"));
+  await sharp(fileBuffer.data).toFile(path.join(__dirname, "/tmp.png"));
   const color = await getColor(path.join(__dirname, "/tmp.png"));
   const rgb = `#${color[0].toString(16).padStart(2, "0")}${color[1]
     .toString(16)
