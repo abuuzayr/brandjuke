@@ -125,10 +125,6 @@ async function checkAndUploadImages() {
     row[colorColumn] = color;
   }
 
-  const csvString = unparse(rows);
-  fs.writeFileSync(csvFile, csvString);
-  fs.appendFileSync(csvFile, "\r\n", "utf8");
-
   const client = new Octokit({
     auth: process.env.GITHUB_TOKEN,
   });
@@ -149,7 +145,7 @@ async function checkAndUploadImages() {
         path: "data/brands.csv",
         mode: "100644",
         type: "commit",
-        content: fs.readFileSync(csvFile, "utf-8"),
+        content: csvString + "\r\n",
       },
     ],
     base_tree: commitSHA,
