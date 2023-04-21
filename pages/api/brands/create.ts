@@ -8,6 +8,7 @@ import sharp from "sharp"
 import path from "path"
 import * as fs from 'fs';
 import { Octokit } from "@octokit/rest";
+import { parse, unparse }  from 'papaparse';
 
 const UPLOAD_LIMIT = 2 * 1024 * 1024; // 2MB
 
@@ -74,9 +75,14 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const newBrand = {
       name,
       image: `${authObj["data"]["downloadUrl"]}/file/brandbuzza/${b64EncodedFileName}`,
-      industry,
       color: baseColorName,
+      industry,
     };
+    const brands = parse(fs.readFileSync("data/brands.csv").toString(), {
+      header: true,
+      skipEmptyLines: true,
+    }).data;
+    brands.push(newBrand)
 
     const client = new Octokit({
       auth: process.env.GITHUB_TOKEN,
@@ -98,9 +104,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
           path: "data/brands.csv",
           mode: "100644",
           type: "commit",
-          content:
-            fs.readFileSync("data/brands.csv").toString() +
-            `${name},${newBrand["image"]},${baseColorName},${industry}\r\n`,
+          content: unparse(brands),
         },
       ],
       base_tree: commitSHA,
