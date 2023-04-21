@@ -68,7 +68,7 @@ export default function Home() {
 
               <button
                 onClick={() => setShowSignInModal(true)}
-                className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-yellow-100 rounded-full px-7 hover:bg-yellow-200"
+                className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-yellow-100 rounded-lg px-7 hover:bg-yellow-200"
               >
                 <Plus className="w-5 h-5 text-yellow-600" />
                 <p className="text-sm font-semibold text-yellow-600">
@@ -78,7 +78,7 @@ export default function Home() {
             ) : (
               <button
                 onClick={() => setShowBrandInputModal(true)}
-                className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-yellow-100 rounded-full px-7 hover:bg-yellow-200"
+                  className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-yellow-100 rounded-lg px-7 hover:bg-yellow-200"
               >
                 <Plus className="w-5 h-5 text-yellow-600" />
                 <p className="text-sm font-semibold text-yellow-600">
@@ -93,7 +93,7 @@ export default function Home() {
             href="https://github.com/abuuzayr/brandbuzza/data/brands.csv"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-gray-100 rounded-full px-7 hover:bg-gray-200"
+            className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200"
           >
             <Github className="w-5 h-5 text-gray-600" />
             <p className="text-sm font-semibold text-gray-600">
