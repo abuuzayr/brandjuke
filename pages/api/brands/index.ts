@@ -1,34 +1,36 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { parse, unparse } from "papaparse";
-import * as fs from "fs";
+import duckdb from "duckdb";
+
+const db = new duckdb.Database(":memory:");
 
 type BrandQuery = {
     name?: string;
 }
 
-type Brand = {
-  name: string;
-  image: string;
-  color: string;
-  industry: number;
-}
+const buildQuery = (filter: BrandQuery) => {
+  const { name } = filter;
+  let query = "SELECT * FROM read_csv_auto('data/brands.csv')";
+  if (name) {
+    query += ` WHERE name ILIKE '%${name}%'`;
+  }
+  
+  return query;
+};
 
 const getBrands = (filter: BrandQuery) => {
-  const { name } = filter;
-  let brands: Brand[] = parse(fs.readFileSync("data/brands.csv").toString(), {
-    header: true,
-    skipEmptyLines: true,
-  }).data as Brand[];
-  if (name) {
-    brands = brands.filter((brand: Brand) => brand.name.toLowerCase().includes(name.toLowerCase()));
-  }
-
-  return brands
+  return new Promise((resolve, reject) => {
+    db.all(buildQuery(filter), (err: any, res: any) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(res);
+    });
+  });
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
-    const brands = getBrands({ name: req.query?.search as string });
+    const brands = await getBrands({ name: req.query?.search as string });
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     return res.status(200).json(brands);
