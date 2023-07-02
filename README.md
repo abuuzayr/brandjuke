@@ -1,5 +1,5 @@
 <a href="https://brandbuzza.com">
-  <img alt="Brandbuzza – Explore brand logos for your inspiration" src="https://brandbuzza.com/api/og">
+  <img alt="Brandbuzza – Explore brand logos for your inspiration" src="https://brandbuzza.up.railway.app/api/og">
   <h1 align="center">Brandbuzza</h1>
 </a>
 
