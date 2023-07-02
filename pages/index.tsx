@@ -18,7 +18,7 @@ type Brand = {
   name: string;
   image: string;
   industry: number;
-  colors: string[];
+  color: string;
 }
 
 export default function Home() {
@@ -133,14 +133,15 @@ export default function Home() {
       {/* here we are animating with Tailwind instead of Framer Motion because Framer Motion messes up the z-index for child components */}
       <div className="my-10 grid w-full max-w-screen-xl animate-[slide-down-fade_0.5s_ease-in-out] grid-cols-1 gap-5 px-5 sm:grid-cols-3 md:grid-cols-5 xl:px-0">
         {(brands || [])
-          .map(({ id, name, image, industry }: { id: string, name: string, image: string, industry: number }) => (
+          .map(({ id, name, image, industry, color }: { id: string, name: string, image: string, industry: number, color: string }) => (
             <Card
-              key={id}
+            key={id}
               name={name}
               image={image}
               industry={industry}
-            />
-          ))}
+              color={color}
+              />
+              ))}
         {/* TODO: handle no search results case */}
       </div>
     </Layout>
