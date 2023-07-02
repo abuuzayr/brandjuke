@@ -48,19 +48,19 @@ export default function Tooltip({
             <TooltipPrimitive.Content
               sideOffset={4}
               side="top"
-              className="z-30 hidden animate-slide-up-fade items-center overflow-hidden rounded-md border border-gray-200 bg-white drop-shadow-lg sm:block"
+              className="z-30 items-center hidden overflow-hidden bg-white border border-gray-200 rounded-md animate-slide-up-fade drop-shadow-lg sm:block"
             >
-              <TooltipPrimitive.Arrow className="fill-current text-white" />
+              <TooltipPrimitive.Arrow className="text-white fill-current" />
               {typeof content === "string" ? (
-                <div className="p-5">
-                  <span className="block max-w-xs text-center text-sm text-gray-700">
+                <div className="p-2">
+                  <span className="block max-w-xs text-sm text-center text-gray-700">
                     {content}
                   </span>
                 </div>
               ) : (
                 content
               )}
-              <TooltipPrimitive.Arrow className="fill-current text-white" />
+              <TooltipPrimitive.Arrow className="text-white fill-current" />
             </TooltipPrimitive.Content>
           </TooltipPrimitive.Root>
         </TooltipPrimitive.Provider>
