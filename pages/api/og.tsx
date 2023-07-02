@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import satori from 'satori';
 import { readFileSync } from 'fs'
 import { NextApiRequest, NextApiResponse } from "next";
@@ -23,6 +24,7 @@ const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
             <img
                 src="https://brandbuzza.up.railway.app/logo.png"
                 alt="Brandbuzza Logo"
+                // @ts-ignore
                 tw="w-20 h-20 mb-4 opacity-95"
             />
             <h1
