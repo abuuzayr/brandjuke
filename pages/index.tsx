@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { useSignInModal } from "@/components/layout/sign-in-modal";
 import { useRouter } from "next/router";
 import { useDebounce } from 'use-debounce';
+import Image from "next/image";
 
 type Brand = {
   id: string;
@@ -110,8 +111,18 @@ export default function Home() {
             Or use them for your next project like this ↓! Always free and open source ❤️
           </Balancer>
         </motion.p>
+        <motion.div className="pt-4 pb-8 mt-12 border-8 rounded-lg border-gray-50" variants={FADE_DOWN_ANIMATION_VARIANTS}>
+          <div className="w-full text-sm font-bold text-center text-gray-400 uppercase">Trusted by</div>
+          <div className="grid grid-cols-2 gap-4 mt-8 lg:grid-cols-6 lg:gap-8">
+            {brands?.slice(0, 6).map((brand) => (
+              <div className="flex items-center justify-center h-8" key={brand.image} >
+                <Image src={brand.image} alt={brand.name} className="object-contain w-32 h-8 grayscale" width={128} height={32} />
+              </div>
+            ))}
+          </div>
+        </motion.div>
         <motion.div
-          className="flex items-center justify-center mx-auto mt-6 space-x-5"
+          className="flex items-center justify-center mx-auto mt-12 space-x-5"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           <input
