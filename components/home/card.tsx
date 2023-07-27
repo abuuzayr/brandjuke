@@ -4,7 +4,7 @@ import { INDUSTRIES } from "@/lib/constants";
 import Tooltip from "@/components/shared/tooltip";
 
 
-const shadeMap = {
+export const shadeMap = {
   red: "FF0000",
   orange: "FFA500",
   yellow: "FFFF00",
