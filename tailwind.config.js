@@ -31,6 +31,38 @@ module.exports = {
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
       },
+      colors: {
+        "shade-red": {
+          DEFAULT: "#FF0000"
+        },
+        "shade-orange": {
+          DEFAULT: "#FFA500"
+        },
+        "shade-yellow": {
+          DEFAULT: "#FFFF00"
+        },
+        "shade-green": {
+          DEFAULT: "#008000"
+        },
+        "shade-blue": {
+          DEFAULT: "#0000FF"
+        },
+        "shade-violet": {
+          DEFAULT: "#EE82EE"
+        },
+        "shade-brown": {
+          DEFAULT: "#A52A2A"
+        },
+        "shade-black": {
+          DEFAULT: "#000000"
+        },
+        "shade-grey": {
+          DEFAULT: "#808080"
+        },
+        "shade-white": {
+          DEFAULT: "#FFFFFF"
+        },
+      }
     },
   },
   plugins: [
