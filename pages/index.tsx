@@ -13,6 +13,10 @@ import { useSignInModal } from "@/components/layout/sign-in-modal";
 import { useRouter } from "next/router";
 import { useDebounce } from 'use-debounce';
 import Image from "next/image";
+import { shadeMap } from "@/components/home/card";
+import Checkbox from "@/components/shared/checkbox";
+import SelectBox from "@/components/shared/select-box";
+import { INDUSTRIES } from "@/lib/constants";
 
 type Brand = {
   id: string;
@@ -25,15 +29,33 @@ type Brand = {
 export default function Home() {
   const router = useRouter()
   const [search, setSearch] = useState("")
+  const [colorFilters, setColorFilters] = useState<string>("")
+  const [industryFilters, setIndustryFilters] = useState<string>("")
   const [debouncedSearch] = useDebounce(search, 1000)
   const { BrandInputModal, setShowBrandInputModal } = useBrandInputModal();
   const { SignInModal, setShowSignInModal } = useSignInModal();
-  const { data: brands } = useSWR<Brand[]>(`/api/brands?search=${debouncedSearch}`, fetcher);
+  const { data: brands } = useSWR<Brand[]>(
+    `/api/brands?${debouncedSearch ? `search=${debouncedSearch}` : ""}${
+      colorFilters ? `${debouncedSearch ? "&" : ""}colors=${colorFilters}` : ""
+    }${
+      industryFilters
+        ? `${debouncedSearch || colorFilters ? "&" : ""}industries=${industryFilters}`
+        : ""
+    }`,
+    fetcher,
+  );
+  const { data: randomBrands } = useSWR<Brand[]>(`/api/brands/random?count=6`, fetcher);
   const { data: session, status } = useSession();
 
   useEffect(() => {
     if (router.query["search"]) {
       setSearch(router.query["search"] as string)
+    }
+    if (router.query["colors"]) {
+      setColorFilters(router.query["colors"] as string)
+    }
+    if (router.query["industries"]) {
+      setIndustryFilters(router.query["industries"] as string);
     }
   }, [router.query])
 
@@ -63,10 +85,12 @@ export default function Home() {
           <Balancer>Explore brand logos for your inspiration</Balancer>
         </motion.h1>
 
-        <motion.div className="flex items-center justify-center mt-6 space-x-5" variants={FADE_DOWN_ANIMATION_VARIANTS}>
+        <motion.div
+          className="flex items-center justify-center mt-6 space-x-5"
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+        >
           <AnimatePresence>
             {!session && status !== "loading" ? (
-
               <button
                 onClick={() => setShowSignInModal(true)}
                 className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-yellow-100 rounded-lg px-7 hover:bg-yellow-200"
@@ -79,13 +103,12 @@ export default function Home() {
             ) : (
               <button
                 onClick={() => setShowBrandInputModal(true)}
-                  className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-yellow-100 rounded-lg px-7 hover:bg-yellow-200"
+                className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-yellow-100 rounded-lg px-7 hover:bg-yellow-200"
               >
                 <Plus className="w-5 h-5 text-yellow-600" />
                 <p className="text-sm font-semibold text-yellow-600">
                   Add a brand
                 </p>
-
               </button>
             )}
           </AnimatePresence>
@@ -108,15 +131,30 @@ export default function Home() {
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           <Balancer>
-            Or use them for your next project like this ↓! Always free and open source ❤️
+            Or use them for your next project like this ↓! Always free and open
+            source ❤️
           </Balancer>
         </motion.p>
-        <motion.div className="pt-4 pb-8 mt-12 border-8 rounded-lg border-gray-50" variants={FADE_DOWN_ANIMATION_VARIANTS}>
-          <div className="w-full text-sm font-bold text-center text-gray-400 uppercase">Trusted by</div>
+        <motion.div
+          className="pt-4 pb-8 mt-12 border-8 rounded-lg border-gray-50"
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+        >
+          <div className="w-full text-sm font-bold text-center text-gray-400 uppercase">
+            Trusted by
+          </div>
           <div className="grid grid-cols-2 gap-4 mt-8 lg:grid-cols-6 lg:gap-8">
-            {brands?.slice(0, 6).map((brand) => (
-              <div className="flex items-center justify-center h-8" key={brand.image} >
-                <Image src={brand.image} alt={brand.name} className="object-contain w-32 h-8 grayscale" width={128} height={32} />
+            {randomBrands?.map((brand) => (
+              <div
+                className="flex items-center justify-center h-8"
+                key={brand.image}
+              >
+                <Image
+                  src={brand.image}
+                  alt={brand.name}
+                  className="object-contain w-32 h-8 grayscale"
+                  width={128}
+                  height={32}
+                />
               </div>
             ))}
           </div>
@@ -128,31 +166,93 @@ export default function Home() {
           <input
             type="text"
             id="search-input"
-            className="block w-4/5 p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+            className="block w-4/5 p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
             placeholder="Search for a brand.."
             value={search}
             onChange={(e) => {
-              setSearch(e.target.value)
+              setSearch(e.target.value);
               // TODO: consider if we should debounce this
-              router.push({
-                pathname: "/",
-                query: { ...(e.target.value && { search: e.target.value }) }
-              }, undefined, { shallow: true })
-            }} />
+              const { search, ...routerWithoutSearch } = router.query;
+              router.push(
+                {
+                  pathname: "/",
+                  query: {
+                    ...routerWithoutSearch,
+                    ...(e.target.value && { search: e.target.value }),
+                  },
+                },
+                undefined,
+                { shallow: true },
+              );
+            }}
+          />
+        </motion.div>
+
+        <motion.div
+          className="flex items-center justify-center mx-auto mt-6 space-x-5"
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+        >
+          {Object.keys(shadeMap).map((color) => (
+            <Checkbox
+              key={color}
+              color={color}
+              checked={
+                colorFilters.split(",").find((c) => c === color) ? true : false
+              }
+              onClickFunc={setColorFilters}
+              router={router}
+            />
+          ))}
+        </motion.div>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center w-4/5 mx-auto mt-6 space-x-2"
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+        >
+          {Object.values(INDUSTRIES)
+            .slice(0, Object.keys(INDUSTRIES).length / 2)
+            .map((industry) => (
+              <SelectBox
+                text={industry as string}
+                key={industry}
+                checked={
+                  !!industryFilters
+                    .split(",")
+                    .find(
+                      (i) => i === encodeURIComponent(industry).toLowerCase(),
+                    )
+                }
+                onClickFunc={setIndustryFilters}
+                router={router}
+              />
+            ))}
         </motion.div>
       </motion.div>
       {/* here we are animating with Tailwind instead of Framer Motion because Framer Motion messes up the z-index for child components */}
       <div className="my-10 grid w-full max-w-screen-xl animate-[slide-down-fade_0.5s_ease-in-out] grid-cols-1 gap-5 px-5 sm:grid-cols-3 md:grid-cols-5 xl:px-0">
-        {(brands || [])
-          .map(({ id, name, image, industry, color }: { id: string, name: string, image: string, industry: number, color: string }) => (
+        {(brands || []).map(
+          ({
+            id,
+            name,
+            image,
+            industry,
+            color,
+          }: {
+            id: string;
+            name: string;
+            image: string;
+            industry: number;
+            color: string;
+          }) => (
             <Card
-            key={id}
+              key={id}
               name={name}
               image={image}
               industry={industry}
               color={color}
-              />
-              ))}
+            />
+          ),
+        )}
         {/* TODO: handle no search results case */}
       </div>
     </Layout>
