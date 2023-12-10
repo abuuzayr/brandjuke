@@ -1,9 +1,12 @@
 import * as fs from "fs"
+import * as path from "path"
 import { NextApiRequest, NextApiResponse } from "next";
 import { _query } from "@/lib/db";
 
+path.join(process.cwd(), "public/data/brands.csv");
+
 const buildQuery = (count: number) => {
-  fs.readdir('.', (err, files) => {
+  fs.readdir('./public', (err, files) => {
     files.forEach((file) => {
       console.log(file);
     });
