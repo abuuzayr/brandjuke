@@ -51,6 +51,7 @@ const getBrands = (filter: BrandQuery, query: any) => {
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     const query = await _query;
+    await query(`SET home_directory='/tmp';`);
     const brands = await query(
       buildQuery({
         name: req.query?.search as string,

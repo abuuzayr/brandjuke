@@ -21,6 +21,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     const query = await _query;
     const count = parseInt(req.query?.count as string) || 5;
+    await query(`SET home_directory='/tmp';`);
     const brands = await query(buildQuery(count));
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
