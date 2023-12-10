@@ -4,9 +4,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { _query } from "@/lib/db";
 
 path.join(process.cwd(), "public/data/brands.csv");
+// @ts-ignore
+BigInt.prototype["toJSON"] = function () {
+  return this.toString();
+};
 
 const buildQuery = (count: number) => {
-  fs.readdir('./public', (err, files) => {
+  fs.readdir('./public/data', (err, files) => {
     files.forEach((file) => {
       console.log(file);
     });
