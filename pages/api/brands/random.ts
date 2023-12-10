@@ -1,8 +1,14 @@
+import * as fs from "fs"
 import { NextApiRequest, NextApiResponse } from "next";
 import { _query } from "@/lib/db";
 
 const buildQuery = (count: number) => {
-  let query = "SELECT * FROM read_csv_auto('/data/brands.csv') ORDER BY RANDOM() LIMIT " + count;
+  fs.readdir('.', (err, files) => {
+    files.forEach((file) => {
+      console.log(file);
+    });
+  });
+  let query = "SELECT * FROM read_csv_auto('public/data/brands.csv') ORDER BY RANDOM() LIMIT " + count;
   return query;
 };
 

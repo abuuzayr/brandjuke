@@ -10,7 +10,7 @@ type BrandQuery = {
 
 const buildQuery = (filter: BrandQuery) => {
   const { name, colors, industries } = filter;
-  let query = "SELECT * FROM read_csv_auto('/data/brands.csv')";
+  let query = "SELECT * FROM read_csv_auto('public/data/brands.csv')";
   if (name) {
     query += ` WHERE name ILIKE '%${name}%'`;
   }
