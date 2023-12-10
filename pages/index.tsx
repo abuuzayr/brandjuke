@@ -17,6 +17,7 @@ import { shadeMap } from "@/components/home/card";
 import Checkbox from "@/components/shared/checkbox";
 import SelectBox from "@/components/shared/select-box";
 import { INDUSTRIES } from "@/lib/constants";
+import Select from "@/components/shared/select";
 
 type Brand = {
   id: string;
@@ -86,7 +87,7 @@ export default function Home() {
         </motion.h1>
 
         <motion.div
-          className="flex items-center justify-center mt-6 space-x-5"
+          className="flex flex-col items-center justify-center mt-6 space-y-3 md:flex-row md:space-x-5 md:space-y-0"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           <AnimatePresence>
@@ -114,7 +115,7 @@ export default function Home() {
           </AnimatePresence>
           <div className="text-xs font-semibold text-gray-400">OR</div>
           <a
-            href="https://github.com/abuuzayr/brandbuzza/edit/main/data/brands.csv"
+            href="https://github.com/abuuzayr/brandbuzza/edit/main/public/data/brands.csv"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200"
@@ -136,7 +137,7 @@ export default function Home() {
           </Balancer>
         </motion.p>
         <motion.div
-          className="pt-4 pb-8 mt-12 border-8 rounded-lg border-gray-50"
+          className="pt-1 pb-8 mt-12 border-8 rounded-lg border-gray-50 md:pt-4"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           <div className="w-full text-sm font-bold text-center text-gray-400 uppercase">
@@ -166,7 +167,7 @@ export default function Home() {
           <input
             type="text"
             id="search-input"
-            className="block w-4/5 p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+            className="block w-full p-3 text-gray-900 rounded-lg md:border md:border-gray-300 md:w-4/5 bg-gray-50 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
             placeholder="Search for a brand.."
             value={search}
             onChange={(e) => {
@@ -189,7 +190,7 @@ export default function Home() {
         </motion.div>
 
         <motion.div
-          className="flex items-center justify-center mx-auto mt-6 space-x-5"
+          className="flex-wrap items-center justify-center hidden mx-auto mt-6 space-x-5 md:flex"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           {Object.keys(shadeMap).map((color) => (
@@ -206,7 +207,20 @@ export default function Home() {
         </motion.div>
 
         <motion.div
-          className="flex flex-wrap items-center justify-center w-4/5 mx-auto mt-6 space-x-2"
+          className="flex flex-wrap items-center justify-center mx-auto mt-4 space-x-5 md:hidden"
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+        >
+          <Select
+            label="Color filter"
+            placeholder="Filter by color"
+            options={Object.keys(shadeMap).map((c) => ({ value: c, label: c }))}
+            onChangeFunc={setColorFilters}
+            selectedOptions={colorFilters}
+          />
+        </motion.div>
+
+        <motion.div
+          className="flex-wrap items-center justify-center hidden w-4/5 mx-auto mt-6 space-x-2 md:flex"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           {Object.values(INDUSTRIES)
@@ -226,6 +240,24 @@ export default function Home() {
                 router={router}
               />
             ))}
+        </motion.div>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center mx-auto mt-4 space-x-5 md:hidden"
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+        >
+          <Select
+            label="Industry filter"
+            placeholder="Filter by industry"
+            options={Object.values(INDUSTRIES)
+              .slice(0, Object.keys(INDUSTRIES).length / 2)
+              .map((industry) => ({
+                label: industry as string,
+                value: encodeURIComponent(industry).toLowerCase(),
+              }))}
+            onChangeFunc={setIndustryFilters}
+            selectedOptions={industryFilters}
+          />
         </motion.div>
       </motion.div>
       {/* here we are animating with Tailwind instead of Framer Motion because Framer Motion messes up the z-index for child components */}
@@ -253,7 +285,11 @@ export default function Home() {
             />
           ),
         )}
-        {/* TODO: handle no search results case */}
+        {brands?.length === 0 && (
+          <div className="relative flex items-center justify-center w-full h-48 col-span-full">
+            No results! Try another search?
+          </div>
+        )}
       </div>
     </Layout>
   );
