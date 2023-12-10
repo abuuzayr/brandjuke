@@ -1,6 +1,13 @@
+import * as path from "path"
 import { NextApiRequest, NextApiResponse } from "next";
 import { INDUSTRIES } from "@/lib/constants";
 import { _query } from "@/lib/db";
+
+path.join(process.cwd(), "public/data/brands.csv");
+// @ts-ignore
+BigInt.prototype["toJSON"] = function () {
+  return this.toString();
+};
 
 type BrandQuery = {
   name?: string;
