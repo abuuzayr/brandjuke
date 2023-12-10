@@ -7,6 +7,7 @@ _query = import("duckdb-async")
   .then((db: any) => (query: string) => db.all(query))
   .catch(async (error) => {
     console.log("duckdb init error:", error);
+    // @ts-ignore
     let duckdb = await import("duckdb-lambda-x86");
     let Database: any = await duckdb.Database;
     const db = new Database(":memory:");
