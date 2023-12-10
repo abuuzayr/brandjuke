@@ -33,7 +33,7 @@ export default function Layout({
       <SignInModal />
       <BrandInputModal />
       <Toaster />
-      <div className="fixed w-full h-screen bg-gradient-to-br from-rose-100 via-white to-teal-100" />
+      <div className="fixed w-full h-screen bg-gradient-to-br from-rose-100 via-white to-teal-100 -z-10" />
       <div
         className={`fixed top-0 w-full ${
           scrolled
@@ -77,7 +77,7 @@ export default function Layout({
       <main className="flex flex-col items-center justify-center w-full py-32">
         {children}
       </main>
-      <div className="absolute flex justify-center w-full py-5 bg-white border-t border-gray-200">
+      <div className="absolute flex justify-center w-full py-5 bg-white bg-opacity-50 border-t border-gray-200">
         <div className="w-4/5">
           <p className="text-gray-500">
             API
