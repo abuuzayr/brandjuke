@@ -21,6 +21,10 @@ const nextConfig = {
           skipEmptyLines: true
         }
       })
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
 
     return config
   },
@@ -33,6 +37,10 @@ const nextConfig = {
       },
     ];
   },
+};
+
+BigInt.prototype.toJSON = function () {
+  return this.toString();
 };
 
 module.exports = nextConfig;

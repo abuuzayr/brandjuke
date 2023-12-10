@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import duckdb from "duckdb";
 import { INDUSTRIES } from "@/lib/constants";
-
-const db = new duckdb.Database(":memory:");
+import { _query } from "@/lib/db";
 
 type BrandQuery = {
   name?: string;
@@ -39,9 +37,9 @@ const buildQuery = (filter: BrandQuery) => {
   return query;
 };
 
-const getBrands = (filter: BrandQuery) => {
+const getBrands = (filter: BrandQuery, query: any) => {
   return new Promise((resolve, reject) => {
-    db.all(buildQuery(filter), (err: any, res: any) => {
+    query(buildQuery(filter), (err: any, res: any) => {
       if (err) {
         reject(err);
       }
@@ -52,11 +50,14 @@ const getBrands = (filter: BrandQuery) => {
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
-    const brands = await getBrands({
-      name: req.query?.search as string,
-      colors: req.query?.colors as string,
-      industries: req.query?.industries as string,
-    });
+    const query = await _query;
+    const brands = await query(
+      buildQuery({
+        name: req.query?.search as string,
+        colors: req.query?.colors as string,
+        industries: req.query?.industries as string,
+      }),
+    );
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     return res.status(200).json(brands);
