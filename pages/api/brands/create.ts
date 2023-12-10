@@ -78,7 +78,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       color: baseColorName,
       industry,
     };
-    const brands = parse(fs.readFileSync("data/brands.csv").toString(), {
+    const brands = parse(fs.readFileSync("public/data/brands.csv").toString(), {
       header: true,
       skipEmptyLines: true,
     }).data;
@@ -101,7 +101,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       repo: "brandbuzza",
       tree: [
         {
-          path: "data/brands.csv",
+          path: "public/data/brands.csv",
           mode: "100644",
           type: "commit",
           content: unparse(brands),

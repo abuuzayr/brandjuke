@@ -98,7 +98,7 @@ async function uploadFile(imageUrl) {
 }
 
 async function checkAndUploadImages() {
-  const csvFile = "./data/brands.csv";
+  const csvFile = "./public/data/brands.csv";
   const csvData = fs.readFileSync(csvFile, "utf-8");
   const rows = parse(csvData, { header: true, skipEmptyLines: true }).data;
 
@@ -142,7 +142,7 @@ async function checkAndUploadImages() {
     repo: "brandbuzza",
     tree: [
       {
-        path: "data/brands.csv",
+        path: "public/data/brands.csv",
         mode: "100644",
         type: "commit",
         content: csvString + "\r\n",
