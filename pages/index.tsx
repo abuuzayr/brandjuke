@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Github, Plus } from "@/components/shared/icons";
 import useSWR from "swr";
+import useSWRImmutable from "swr/immutable"
 import { fetcher } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useBrandInputModal } from "@/components/home/brand-input-modal";
@@ -45,7 +46,10 @@ export default function Home() {
     }`,
     fetcher,
   );
-  const { data: randomBrands } = useSWR<Brand[]>(`/api/brands/random?count=6`, fetcher);
+  const { data: randomBrands } = useSWRImmutable<Brand[]>(
+    `/api/brands/random?count=6`,
+    fetcher
+  );
   const { data: session, status } = useSession();
 
   useEffect(() => {
