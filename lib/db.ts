@@ -12,4 +12,12 @@ try {
   db = await duckdb.Database.create(":memory:");
 }
 
-export const _query = (query: string) => db.all(query)
+// Promisify query method
+export const _query = (query: string) => {
+  return new Promise((resolve, reject) => {
+    db.all(query, (err: any, res: any) => {
+      if (err) reject(err);
+      resolve(res);
+    });
+  })
+}
