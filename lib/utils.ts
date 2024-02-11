@@ -62,6 +62,6 @@ export const truncate = (str: string, length: number) => {
   return `${str.slice(0, length)}...`;
 };
 
-export function classNames(...classes) {
+export function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }

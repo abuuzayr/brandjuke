@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 export const runtime = "edge";
 
 export const authOptions: NextAuthOptions = {
+  // @ts-ignore
   adapter: D1Adapter(process.env.db),
   providers: [
     GoogleProvider({

@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { useDemoModal } from "@/components/home/card-modal";
 import Popover from "@/components/shared/popover";
 import Tooltip from "@/components/shared/tooltip";
 import { ChevronDown } from "lucide-react";
 
 export default function ComponentGrid() {
-  const { DemoModal, setShowDemoModal } = useDemoModal();
   const [openPopover, setOpenPopover] = useState(false);
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-      <DemoModal />
       <button
-        onClick={() => setShowDemoModal(true)}
+        onClick={() => {}}
         className="flex items-center justify-center w-40 px-3 py-2 transition-all duration-75 border border-gray-300 rounded-md hover:border-gray-800 focus:outline-none active:bg-gray-100"
       >
         <p className="text-gray-600">Modal</p>
