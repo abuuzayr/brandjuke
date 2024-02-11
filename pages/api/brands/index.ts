@@ -4,6 +4,9 @@ import { INDUSTRIES } from "@/lib/constants";
 import { _query } from "@/lib/db";
 
 path.join(process.cwd(), "public/data/brands.csv");
+
+export const runtime = "edge";
+
 // @ts-ignore
 BigInt.prototype["toJSON"] = function () {
   return this.toString();

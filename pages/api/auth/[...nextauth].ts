@@ -2,6 +2,8 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import { D1Adapter } from "@auth/d1-adapter"
 import GoogleProvider from "next-auth/providers/google";
 
+export const runtime = "edge";
+
 export const authOptions: NextAuthOptions = {
   adapter: D1Adapter(process.env.db),
   providers: [

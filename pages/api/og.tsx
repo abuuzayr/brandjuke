@@ -6,6 +6,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 export const alt = "⚡️ BrandBuzza - Logo inspiration and API";
 export const contentType = "image/svg+xml";
 
+export const runtime = "edge";
+
 const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
     const svg = await satori(
         <div

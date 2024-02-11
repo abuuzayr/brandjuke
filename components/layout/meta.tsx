@@ -2,6 +2,7 @@ import Head from "next/head";
 
 const DOMAIN = "https://brandjuke.com";
 
+export const runtime = "edge";
 export default function Meta({
   title = "⚡️ BrandJuke - Logo inspiration and API",
   description = "Brandjuke is an open-source collection of brand logos for your inspiration and consumption.",
