@@ -21,16 +21,19 @@ export default function Card({
   name,
   image,
   industry,
-  color
+  color,
+  onClickFunc
 }: {
   name: string;
   image: string;
   industry: number;
   color: string;
+  onClickFunc: any
 }) {
   return (
     <div
       className="relative col-span-1 overflow-hidden bg-white border border-gray-200 shadow-md h-80 rounded-xl"
+      onClick={onClickFunc}
     >
       <Tooltip content={
         <div className="p-2">

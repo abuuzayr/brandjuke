@@ -19,8 +19,9 @@ import Checkbox from "@/components/shared/checkbox";
 import SelectBox from "@/components/shared/select-box";
 import { INDUSTRIES } from "@/lib/constants";
 import Select from "@/components/shared/select";
+import { useCardModal } from "@/components/home/card-modal";
 
-type Brand = {
+export type Brand = {
   id: string;
   name: string;
   image: string;
@@ -36,6 +37,7 @@ export default function Home() {
   const [debouncedSearch] = useDebounce(search, 1000)
   const { BrandInputModal, setShowBrandInputModal } = useBrandInputModal();
   const { SignInModal, setShowSignInModal } = useSignInModal();
+  const { setBrandData, CardModal } = useCardModal();
   const { data: brands } = useSWR<Brand[]>(
     `/api/brands?${debouncedSearch ? `search=${debouncedSearch}` : ""}${
       colorFilters ? `${debouncedSearch ? "&" : ""}colors=${colorFilters}` : ""
@@ -68,6 +70,7 @@ export default function Home() {
     <Layout>
       <BrandInputModal />
       <SignInModal />
+      <CardModal />
       <motion.div
         className="px-5 max-w-7xl xl:px-0"
         initial="hidden"
@@ -87,7 +90,9 @@ export default function Home() {
           className="bg-gradient-to-br from-orange-500 to-yellow-300 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem]"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
-          <Balancer>Explore brand logos for your inspiration</Balancer>
+          <Balancer>
+            Explore brand logos for your inspiration and consumption
+          </Balancer>
         </motion.h1>
 
         <motion.div
@@ -119,7 +124,7 @@ export default function Home() {
           </AnimatePresence>
           <div className="text-xs font-semibold text-gray-400">OR</div>
           <a
-            href="https://github.com/abuuzayr/brandbuzza/edit/main/public/data/brands.csv"
+            href="https://github.com/abuuzayr/brandjuke/edit/main/public/data/brands.csv"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center py-2 space-x-2 overflow-hidden transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200"
@@ -171,7 +176,7 @@ export default function Home() {
           <input
             type="text"
             id="search-input"
-            className="block w-full p-3 text-gray-900 rounded-lg md:border md:border-gray-300 md:w-4/5 bg-gray-50 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+            className="block w-full p-3 text-gray-900 rounded-lg bg-gray-50 focus:border-blue-500 focus:ring-blue-500 sm:text-sm md:w-4/5 md:border md:border-gray-300"
             placeholder="Search for a brand.."
             value={search}
             onChange={(e) => {
@@ -286,6 +291,15 @@ export default function Home() {
               image={image}
               industry={industry}
               color={color}
+              onClickFunc={() =>
+                setBrandData({
+                  id,
+                  name,
+                  image,
+                  industry,
+                  color,
+                })
+              }
             />
           ),
         )}

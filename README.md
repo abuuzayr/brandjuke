@@ -1,10 +1,10 @@
-<a href="https://brandbuzza.com">
-  <img alt="Brandbuzza – Explore brand logos for your inspiration" src="https://brandbuzza.up.railway.app/api/og">
-  <h1 align="center">Brandbuzza</h1>
+<a href="https://brandjuke.com">
+  <img alt="Brandjuke – Explore brand logos for your inspiration and consumption" src="https://brandjuke.up.railway.app/api/og">
+  <h1 align="center">Brandjuke</h1>
 </a>
 
 <p align="center">
-  Explore brand logos for your inspiration
+  Explore brand logos for your inspiration and consumption
 </p>
 
 <p align="center">
@@ -15,7 +15,7 @@
 
 ## Introduction
 
-Brandbuzza is an open source collection of brand logos for your inspiration.
+Brandjuke is an open source collection of brand logos for your inspiration and consumption.
 
 ## List of colors
 

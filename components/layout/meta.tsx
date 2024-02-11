@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-const DOMAIN = "https://brandbuzza.com";
+const DOMAIN = "https://brandjuke.com";
 
 export default function Meta({
-  title = "⚡️ BrandBuzza - Logo inspiration and API",
-  description = "Brandbuzza is an open-source collection of brand logos for your inspiration.",
+  title = "⚡️ BrandJuke - Logo inspiration and API",
+  description = "Brandjuke is an open-source collection of brand logos for your inspiration and consumption.",
   image = `${DOMAIN}/api/og`,
 }: {
   title?: string;

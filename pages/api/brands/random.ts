@@ -10,24 +10,8 @@ BigInt.prototype["toJSON"] = function () {
 };
 
 const buildQuery = (count: number) => {
-  fs.readdir('./public/data', (err, files) => {
-    files.forEach((file) => {
-      console.log(file);
-    });
-  });
   let query = "SELECT * FROM read_csv_auto('public/data/brands.csv') ORDER BY RANDOM() LIMIT " + count;
   return query;
-};
-
-const getBrands = (count: number, query: any) => {
-  return new Promise((resolve, reject) => {
-    query(buildQuery(count), (err: any, res: any) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(res);
-    });
-  });
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {

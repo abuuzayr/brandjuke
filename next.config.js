@@ -32,7 +32,7 @@ const nextConfig = {
     return [
       {
         source: "/github",
-        destination: "https://github.com/abuuzayr/brandbuzza",
+        destination: "https://github.com/abuuzayr/brandjuke",
         permanent: false,
       },
     ];

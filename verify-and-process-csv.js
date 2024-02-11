@@ -129,9 +129,9 @@ async function checkAndUploadImages() {
     auth: process.env.GITHUB_TOKEN,
   });
   const commits = await client.repos.listCommits({
-    // TODO: Change to brandbuzza-bot or something
+    // TODO: Change to brandjuke-bot or something
     owner: process.env.GITHUB_ACTOR,
-    repo: "brandbuzza",
+    repo: "brandjuke",
   });
   const commitSHA = commits.data[0].sha;
 
@@ -139,7 +139,7 @@ async function checkAndUploadImages() {
     data: { sha: currentTreeSHA },
   } = await client.git.createTree({
     owner: process.env.GITHUB_ACTOR,
-    repo: "brandbuzza",
+    repo: "brandjuke",
     tree: [
       {
         path: "public/data/brands.csv",
@@ -157,7 +157,7 @@ async function checkAndUploadImages() {
     data: { sha: newCommitSHA },
   } = await client.git.createCommit({
     owner: process.env.GITHUB_ACTOR,
-    repo: "brandbuzza",
+    repo: "brandjuke",
     tree: currentTreeSHA,
     message: `Update brands.csv by Github Action`,
     parents: [commitSHA],
@@ -171,14 +171,14 @@ async function checkAndUploadImages() {
 
   await client.git.createRef({
     owner: process.env.GITHUB_ACTOR,
-    repo: "brandbuzza",
+    repo: "brandjuke",
     ref: `refs/${refName}`,
     sha: newCommitSHA,
   });
 
   const createPrResponse = await client.rest.pulls.create({
     owner: process.env.GITHUB_ACTOR,
-    repo: "brandbuzza",
+    repo: "brandjuke",
     head: branchName,
     base: "main",
     title: `Update brands.csv by Github Action`,
@@ -186,7 +186,7 @@ async function checkAndUploadImages() {
 
   await client.rest.pulls.merge({
     owner: process.env.GITHUB_ACTOR,
-    repo: "brandbuzza",
+    repo: "brandjuke",
     pull_number: createPrResponse.data.number,
   });
 }

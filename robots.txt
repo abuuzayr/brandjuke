@@ -1,4 +1,4 @@
-Sitemap: https://brandbuzza.com/sitemap.xml
+Sitemap: https://brandjuke.com/sitemap.xml
 
 User-agent: *
 Disallow: /api

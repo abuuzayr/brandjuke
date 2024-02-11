@@ -22,8 +22,8 @@ const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
             }}
         >
             <img
-                src="https://brandbuzza.up.railway.app/logo.png"
-                alt="Brandbuzza Logo"
+                src="https://brandjuke.up.railway.app/logo.png"
+                alt="Brandjuke Logo"
                 // @ts-ignore
                 tw="w-20 h-20 mb-4 opacity-95"
             />

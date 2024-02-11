@@ -44,17 +44,6 @@ const buildQuery = (filter: BrandQuery) => {
   return query;
 };
 
-const getBrands = (filter: BrandQuery, query: any) => {
-  return new Promise((resolve, reject) => {
-    query(buildQuery(filter), (err: any, res: any) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(res);
-    });
-  });
-};
-
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     const query = await _query;

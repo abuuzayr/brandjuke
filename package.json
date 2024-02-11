@@ -1,5 +1,5 @@
 {
-  "name": "brandbuzza",
+  "name": "brandjuke",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/d1-adapter": "^0.5.3",
     "@headlessui/react": "^1.7.16",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@next/font": "13.1.1",

@@ -33,7 +33,7 @@ export default function Layout({
       <SignInModal />
       <BrandInputModal />
       <Toaster />
-      <div className="fixed w-full h-screen bg-gradient-to-br from-rose-100 via-white to-teal-100 -z-10" />
+      <div className="fixed w-full h-screen -z-10 bg-gradient-to-br from-rose-100 via-white to-teal-100" />
       <div
         className={`fixed top-0 w-full ${
           scrolled
@@ -44,13 +44,13 @@ export default function Layout({
         <div className="flex items-center justify-between h-16 max-w-screen-xl mx-5 xl:mx-auto">
           <Link href="/" className="flex items-center text-2xl font-display">
             <Buzz className="w-8 h-8" />
-            <p>BrandBuzza</p>
+            <p>BrandJuke</p>
           </Link>
           <div className="flex space-x-2">
             <AnimatePresence>
               <a
-                className="flex items-center justify-center px-5 space-x-2 text-sm text-gray-600 transition-colors rounded-lg shadow hover:shadow-md max-w-fit"
-                href="https://github.com/abuuzayr/brandbuzza"
+                className="flex items-center justify-center px-5 space-x-2 text-sm text-gray-600 transition-colors rounded-lg shadow max-w-fit hover:shadow-md"
+                href="https://github.com/abuuzayr/brandjuke"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -79,9 +79,12 @@ export default function Layout({
       </main>
       <div className="absolute flex justify-center w-full py-5 bg-white bg-opacity-50 border-t border-gray-200">
         <div className="w-4/5">
-          <p className="text-gray-500">
-            API
-          </p>
+          <Link
+            href="/api-docs"
+            className="flex items-center text-gray-500"
+          >
+            <p>API Docs</p>
+          </Link>
         </div>
       </div>
     </>

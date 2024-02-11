@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDemoModal } from "@/components/home/demo-modal";
+import { useDemoModal } from "@/components/home/card-modal";
 import Popover from "@/components/shared/popover";
 import Tooltip from "@/components/shared/tooltip";
 import { ChevronDown } from "lucide-react";
@@ -45,7 +45,7 @@ export default function ComponentGrid() {
           />
         </button>
       </Popover>
-      <Tooltip content="Brandbuzza is an open-source collection of brand logos for your inspiration">
+      <Tooltip content="Brandjuke is an open-source collection of brand logos for your inspiration and consumption">
         <div className="flex items-center justify-center w-40 px-3 py-2 transition-all duration-75 border border-gray-300 rounded-md cursor-default hover:border-gray-800 focus:outline-none active:bg-gray-100">
           <p className="text-gray-600">Tooltip</p>
         </div>

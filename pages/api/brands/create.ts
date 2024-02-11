@@ -88,9 +88,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       auth: process.env.GITHUB_TOKEN,
     });
     const commits = await client.repos.listCommits({
-      // TODO: Change to brandbuzza-bot or something
+      // TODO: Change to brandjuke-bot or something
       owner: "abuuzayr",
-      repo: "brandbuzza",
+      repo: "brandjuke",
     });
     const commitSHA = commits.data[0].sha;
 
@@ -98,7 +98,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       data: { sha: currentTreeSHA },
     } = await client.git.createTree({
       owner: "abuuzayr",
-      repo: "brandbuzza",
+      repo: "brandjuke",
       tree: [
         {
           path: "public/data/brands.csv",
@@ -116,7 +116,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       data: { sha: newCommitSHA },
     } = await client.git.createCommit({
       owner: "abuuzayr",
-      repo: "brandbuzza",
+      repo: "brandjuke",
       tree: currentTreeSHA,
       message: `Add ${name} data by user`,
       parents: [commitSHA],
@@ -130,14 +130,14 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
     await client.git.createRef({
       owner: "abuuzayr",
-      repo: "brandbuzza",
+      repo: "brandjuke",
       ref: `refs/${refName}`,
       sha: newCommitSHA,
     });
 
     const createPrResponse = await client.rest.pulls.create({
       owner: "abuuzayr",
-      repo: "brandbuzza",
+      repo: "brandjuke",
       head: branchName,
       base: "main",
       title: `Add ${name} data by user`,
@@ -145,7 +145,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
     await client.rest.pulls.merge({
       owner: "abuuzayr",
-      repo: "brandbuzza",
+      repo: "brandjuke",
       pull_number: createPrResponse.data.number,
     });
 
