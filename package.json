@@ -13,8 +13,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/d1-adapter": "^0.5.3",
-    "@cloudflare/next-on-pages": "^1.8.6",
     "@headlessui/react": "^1.7.16",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@next/font": "13.1.1",

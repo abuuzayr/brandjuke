@@ -1,12 +1,10 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
-import { D1Adapter } from "@auth/d1-adapter"
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/lib/prisma";
 import GoogleProvider from "next-auth/providers/google";
 
-export const runtime = "edge";
-
 export const authOptions: NextAuthOptions = {
-  // @ts-ignore
-  adapter: D1Adapter(process.env.db),
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
