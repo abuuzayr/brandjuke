@@ -11,8 +11,6 @@ import UserDropdown from "./user-dropdown";
 import { Toaster } from "react-hot-toast";
 import { useBrandInputModal } from "../home/brand-input-modal";
 
-export const runtime = "edge";
-
 export default function Layout({
   meta,
   children,

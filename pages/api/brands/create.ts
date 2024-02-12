@@ -12,8 +12,6 @@ import { parse, unparse }  from 'papaparse';
 
 const UPLOAD_LIMIT = 2 * 1024 * 1024; // 2MB
 
-export const runtime = "edge";
-
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { name, image, industry } = req.body;
