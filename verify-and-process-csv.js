@@ -104,7 +104,7 @@ async function checkAndUploadImages() {
 
   for (const row of rows) {
     const imageUrl = row[imageColumn];
-    if (imageUrl.startsWith("https://f000.backblazeb2.com/file/brandbuzza/")) {
+    if (imageUrl.startsWith("https://images.brandjuke.com/")) {
       continue;
     }
 

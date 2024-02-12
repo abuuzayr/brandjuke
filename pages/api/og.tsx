@@ -3,7 +3,7 @@ import satori from 'satori';
 import { readFileSync } from 'fs'
 import { NextApiRequest, NextApiResponse } from "next";
 
-export const alt = "⚡️ BrandBuzza - Logo inspiration and API";
+export const alt = "⚡️ BrandJuke - Logo inspiration and API";
 export const contentType = "image/svg+xml";
 
 const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,7 +23,7 @@ const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
         >
             <img
                 src="https://brandjuke.up.railway.app/logo.png"
-                alt="Brandjuke Logo"
+                alt="BrandJuke Logo"
                 // @ts-ignore
                 tw="w-20 h-20 mb-4 opacity-95"
             />
