@@ -22,7 +22,7 @@ const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
             }}
         >
             <img
-                src="https://brandjuke.up.railway.app/logo.png"
+                src="https://www.brandjuke.com/logo.png"
                 alt="BrandJuke Logo"
                 // @ts-ignore
                 tw="w-20 h-20 mb-4 opacity-95"
@@ -39,7 +39,7 @@ const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
                     letterSpacing: "-0.02em",
                 }}
             >
-                BrandBuzza
+                BrandJuke
             </h1>
         </div>,
         {

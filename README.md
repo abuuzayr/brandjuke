@@ -1,6 +1,6 @@
 <a href="https://brandjuke.com">
-  <img alt="Brandjuke – Explore brand logos for your inspiration and consumption" src="https://brandjuke.up.railway.app/api/og">
-  <h1 align="center">Brandjuke</h1>
+  <img alt="BrandJuke – Explore brand logos for your inspiration and consumption" src="https://www.brandjuke.com/api/og">
+  <h1 align="center">BrandJuke</h1>
 </a>
 
 <p align="center">
