@@ -11,6 +11,10 @@ import { Octokit } from "@octokit/rest";
 import { parse, unparse }  from 'papaparse';
 
 const UPLOAD_LIMIT = 2 * 1024 * 1024; // 2MB
+const IMAGE_URL = 'https://images.brandjuke.com'
+const BRANDS_CSV =
+  "https://raw.githubusercontent.com/abuuzayr/brandjuke/main/public/data/brands.csv";
+const tempDir = process.env.NODE_ENV === "development" ? __dirname : "/tmp"
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -45,28 +49,32 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       },
     );
-    await sharp(fileBuffer).toFile(path.join(__dirname, "/tmp.webp"));
-    const fileHash = await hasha.fromFile(path.join(__dirname, "/tmp.webp"), {
+    await sharp(fileBuffer).toFile(path.join(tempDir, "/tmp.webp"));
+    const fileHash = await hasha.fromFile(path.join(tempDir, "/tmp.webp"), {
       algorithm: "sha1",
     });
-    const b64EncodedFileName =
-      encodeURI(Buffer.from(image.split("/").slice(-1)[0]).toString("base64")) +
-      ".webp";
+    const b64EncodedFileName = encodeURI(
+      Buffer.from(image.split("/").slice(-1)[0]).toString("base64"),
+    );
+    const hashedFileName =
+      hasha(b64EncodedFileName, {
+        algorithm: "md5",
+      }) + ".webp";
     const uploadedObj = await axios({
       url: uploadUrlObj["data"]["uploadUrl"],
       method: "POST",
-      data: fs.readFileSync(path.join(__dirname, "/tmp.webp")),
+      data: fs.readFileSync(path.join(tempDir, "/tmp.webp")),
       headers: {
         Authorization: uploadUrlObj["data"]["authorizationToken"],
-        "X-Bz-File-Name": b64EncodedFileName,
+        "X-Bz-File-Name": hashedFileName,
         "Content-Type": "b2/x-auto",
         "X-Bz-Content-Sha1": fileHash,
       },
     });
 
     // Get dominant color
-    await sharp(fileBuffer).toFile(path.join(__dirname, "/tmp.png"));
-    const color = await getColor(path.join(__dirname, "/tmp.png"));
+    await sharp(fileBuffer).toFile(path.join(tempDir, "/tmp.png"));
+    const color = await getColor(path.join(tempDir, "/tmp.png"));
     const rgb = `#${color[0].toString(16).padStart(2, "0")}${color[1]
       .toString(16)
       .padStart(2, "0")}${color[2].toString(16).padStart(2, "0")}`;
@@ -74,11 +82,12 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const newBrand = {
       name,
-      image: `${authObj["data"]["downloadUrl"]}/file/brandbuzza/${b64EncodedFileName}`,
+      image: `${IMAGE_URL}/${hashedFileName}`,
       color: baseColorName,
       industry,
     };
-    const brands = parse(fs.readFileSync("public/data/brands.csv").toString(), {
+    const brandsCsv = await axios.get(BRANDS_CSV)
+    const brands = parse(brandsCsv.data, {
       header: true,
       skipEmptyLines: true,
     }).data;
@@ -125,7 +134,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const refHash = hasha(new Date().toISOString(), {
       algorithm: "md5",
     }).substring(0, 10);
-    const branchName = `add-${name.toLowerCase()}-${refHash}`;
+    const branchName = `add-${name.toLowerCase().replace(/ /g, "-")}-${refHash}`;
     const refName = `heads/${branchName}`;
 
     await client.git.createRef({

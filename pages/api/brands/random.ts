@@ -3,15 +3,15 @@ import * as path from "path"
 import { NextApiRequest, NextApiResponse } from "next";
 import { _query } from "@/lib/db";
 
-path.join(process.cwd(), "public/data/brands.csv");
-
 // @ts-ignore
 BigInt.prototype["toJSON"] = function () {
   return this.toString();
 };
 
 const buildQuery = (count: number) => {
-  let query = "SELECT * FROM read_csv_auto('public/data/brands.csv') ORDER BY RANDOM() LIMIT " + count;
+  let query =
+    "SELECT * FROM read_csv_auto('https://raw.githubusercontent.com/abuuzayr/brandjuke/main/public/data/brands.csv') ORDER BY RANDOM() LIMIT " +
+    count;
   return query;
 };
 
