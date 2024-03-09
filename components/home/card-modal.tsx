@@ -46,7 +46,7 @@ const CardModal = ({
                 <tr>
                   <td
                     className={classNames(
-                      "hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell",
+                      "px-3 py-3.5 text-sm text-gray-500 table-cell",
                     )}
                   >
                     Brand
@@ -56,7 +56,7 @@ const CardModal = ({
                 <tr>
                   <td
                     className={classNames(
-                      "hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell",
+                      "px-3 py-3.5 text-sm text-gray-500 table-cell",
                     )}
                   >
                     Base color
@@ -87,7 +87,7 @@ const CardModal = ({
                 <tr>
                   <td
                     className={classNames(
-                      "hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell",
+                      "px-3 py-3.5 text-sm text-gray-500 table-cell",
                     )}
                   >
                     Industry
@@ -99,7 +99,7 @@ const CardModal = ({
                 <tr>
                   <td
                     className={classNames(
-                      "hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell",
+                      "px-3 py-3.5 text-sm text-gray-500 table-cell",
                     )}
                   >
                     Image URL
