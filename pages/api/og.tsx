@@ -48,7 +48,7 @@ const ogImage = async (req: NextApiRequest, res: NextApiResponse) => {
             fonts: [
                 {
                     name: 'SF Pro',
-                    data: readFileSync('./fonts/SF-Pro-Display-Medium.otf'),
+                    data: readFileSync('public/fonts/SF-Pro-Display-Medium.otf'),
                 },
             ],
         },
